@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgwsek2iqwupu"]
+
+[ext_resource type="Script" uid="uid://dwc0tyma2wr10" path="res://scirpt/die_zone.gd" id="1_wh4ho"]
+
+[node name="DieZone" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_wh4ho")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

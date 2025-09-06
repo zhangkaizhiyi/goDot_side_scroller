@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://bi2c2ar45ke1"]
+
+[ext_resource type="Texture2D" uid="uid://c0mjlrylvamui" path="res://assets/sprites/slime_green.png" id="1_0i5mj"]
+[ext_resource type="Script" uid="uid://qpeun5ps01eu" path="res://scirpt/enermy.gd" id="1_y8tn5"]
+[ext_resource type="PackedScene" uid="uid://bgwsek2iqwupu" path="res://scene/compoment/die_zone.tscn" id="3_rfyg4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8tn5"]
+atlas = ExtResource("1_0i5mj")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rfyg4"]
+atlas = ExtResource("1_0i5mj")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xu5hb"]
+atlas = ExtResource("1_0i5mj")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whh5f"]
+atlas = ExtResource("1_0i5mj")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qdfos"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y8tn5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rfyg4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xu5hb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whh5f")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0i5mj"]
+radius = 8.06226
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rfyg4"]
+
+[node name="Enermy" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 3
+script = ExtResource("1_y8tn5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qdfos")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.384721
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7)
+shape = SubResource("CircleShape2D_0i5mj")
+
+[node name="DieZone" parent="." instance=ExtResource("3_rfyg4")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DieZone"]
+position = Vector2(0, 7)
+shape = SubResource("CircleShape2D_rfyg4")
+debug_color = Color(0.807646, 0.382916, 0.426, 0.42)
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(0, 7)
+target_position = Vector2(8, 0)
+collision_mask = 2
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(0, 7)
+target_position = Vector2(-8, 0)
+collision_mask = 2
